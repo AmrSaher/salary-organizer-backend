@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +20,15 @@ class AuthController extends Controller
             'except' => [
                 'login',
                 'register',
-            ]
+            ],
         ]);
+    }
+
+    public function show(Request $request)
+    {
+        $user = User::with('profile')->where('id', $request->user()->id)->first();
+
+        return response()->json($user, 200);
     }
 
     /**
@@ -57,7 +65,11 @@ class AuthController extends Controller
             'password' => ['required', 'string', 'min:6'],
         ]);
 
-        User::create($credentials);
+        $user = User::create($credentials);
+
+        Profile::create([
+            'user_id' => $user->id,
+        ]);
 
         if (!$token = Auth::attempt($credentials)) {
             return response()->json([
