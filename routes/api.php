@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,4 +26,7 @@ Route::middleware('api')->group(function () {
 
     // Profile
     Route::put('profile', [ProfilesController::class, 'update']);
+
+    // Categories
+    Route::post('categories', [CategoriesController::class, 'store']);
 });

@@ -29,7 +29,10 @@ class AuthController extends Controller
 
     public function show(Request $request)
     {
-        $user = User::with('profile')->where('id', $request->user()->id)->first();
+        $user = User::with([
+            'profile',
+            'categories'
+        ])->where('id', $request->user()->id)->first();
 
         return response()->json($user, 200);
     }
