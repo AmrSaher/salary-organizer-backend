@@ -31,10 +31,17 @@ class AuthController extends Controller
     {
         $user = User::with([
             'profile',
-            'categories'
+            'categories',
         ])->where('id', $request->user()->id)->first();
+        $user->profile->spend = 0;
 
-        return response()->json($user, 200);
+        foreach ($user->expenses as $expense) {
+            $user->profile->spend += $expense->cost;
+        }
+
+        $user->profile->residual = $user->profile->salary - $user->profile->spend;
+
+        return response()->json($user);
     }
 
     /**

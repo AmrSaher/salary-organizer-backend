@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\ProfilesController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,7 @@ Route::middleware('api')->group(function () {
 
     // Categories
     Route::post('categories', [CategoriesController::class, 'store']);
+
+    // Expenses
+    Route::get('expenses/{category_id}', [ExpensesController::class, 'index']);
 });
