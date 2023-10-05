@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\ProfilesController;
+use App\Http\Controllers\TransactionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,9 @@ Route::middleware('api')->group(function () {
     Route::post('categories', [CategoriesController::class, 'store']);
 
     // Expenses
-    Route::get('expenses/{category_id}', [ExpensesController::class, 'index']);
+    Route::get('expenses/{category}', [ExpensesController::class, 'index']);
     Route::post('expenses/{category}', [ExpensesController::class, 'store']);
+
+    // Transactions
+    Route::post('transactions', [TransactionsController::class, 'store']);
 });
