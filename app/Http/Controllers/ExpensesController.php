@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Expense;
+use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
 {
@@ -17,5 +17,23 @@ class ExpensesController extends Controller
         $expenses = Expense::where('category_id', $category_id)->get();
 
         return response()->json($expenses);
+    }
+
+    public function store(Request $request, $category_id)
+    {
+        $attrs = $request->validate([
+            'title' => ['required', 'string'],
+            'cost' => ['required', 'numeric'],
+        ]);
+
+        Expense::create([
+            ...$attrs,
+            'user_id' => $request->user()->id,
+            'category_id' => $category_id
+        ]);
+
+        return response()->json([
+            'message' => 'Expense created successfully!',
+        ]);
     }
 }

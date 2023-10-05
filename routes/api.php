@@ -33,4 +33,5 @@ Route::middleware('api')->group(function () {
 
     // Expenses
     Route::get('expenses/{category_id}', [ExpensesController::class, 'index']);
+    Route::post('expenses/{category}', [ExpensesController::class, 'store']);
 });

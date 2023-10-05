@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Models\User;
-use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-use function Laravel\Prompts\error;
 
 class AuthController extends Controller
 {
