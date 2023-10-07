@@ -37,4 +37,16 @@ class CategoriesController extends Controller
             'message' => 'Category created successfully!',
         ]);
     }
+
+    public function destroy(Request $request, Category $category)
+    {
+        if ($request->user()->id != $category->user_id) return response()->json([
+            'message' => 'Fuck you',
+        ]);
+
+        $category->delete();
+        return response()->json([
+            'message' => 'Category deleted successfully!',
+        ]);
+    }
 }
