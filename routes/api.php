@@ -36,6 +36,7 @@ Route::middleware('api')->group(function () {
     // Expenses
     Route::get('expenses/{category}', [ExpensesController::class, 'index']);
     Route::post('expenses/{category}', [ExpensesController::class, 'store']);
+    Route::delete('expenses/{expense}', [ExpensesController::class, 'destroy']);
 
     // Transactions
     Route::post('transactions', [TransactionsController::class, 'store']);

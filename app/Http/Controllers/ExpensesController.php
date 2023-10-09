@@ -36,4 +36,16 @@ class ExpensesController extends Controller
             'message' => 'Expense created successfully!',
         ]);
     }
+
+    public function destroy(Request $request, Expense $expense)
+    {
+        if ($request->user()->id != $expense->user_id) return response()->json([
+            'message' => 'Fuck you',
+        ]);
+
+        $expense->delete();
+        return response()->json([
+            'message' => 'Expense deleted successfully!',
+        ]);
+    }
 }
