@@ -40,4 +40,5 @@ Route::middleware('api')->group(function () {
 
     // Transactions
     Route::post('transactions', [TransactionsController::class, 'store']);
+    Route::delete('transactions/{transaction}', [TransactionsController::class, 'destroy']);
 });

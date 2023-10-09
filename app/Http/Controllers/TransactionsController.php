@@ -31,4 +31,16 @@ class TransactionsController extends Controller
             'message' => 'Transaction created successfully!',
         ]);
     }
+
+    public function destroy(Request $request, Transaction $transaction)
+    {
+        if ($request->user()->id != $transaction->user_id) return response()->json([
+            'message' => 'Fuck you',
+        ]);
+
+        $transaction->delete();
+        return response()->json([
+            'message' => 'Transaction deleted successfully!',
+        ]);
+    }
 }
